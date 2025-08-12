@@ -1,8 +1,8 @@
 //import SearchBox from "../components/SearchBox";
 //import TermsAndConditions from "../components/TermsAndConditions";
 
-import { Toaster } from "react-hot-toast";
-import ToastDemo from "../components/ToastDemo";
+//import { Toaster } from "react-hot-toast";
+import OrderStatusSelector from "../components/OrderStatusSelector";
 
 const PlaygroundPage = () => {
   // return <TermsAndConditions />;
@@ -12,11 +12,12 @@ const PlaygroundPage = () => {
     // "
     //     />
     // <SearchBox onChange={(text) => console.log(text)} />
-    <>
-      {" "}
-      <ToastDemo />
-      <Toaster />
-    </>
+    // <>
+    //   {" "}
+    //   <ToastDemo />
+    //   <Toaster />
+    // </>
+    <OrderStatusSelector onChange={console.log} />
   );
 };
 
