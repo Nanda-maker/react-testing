@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
+import { delay, http, HttpResponse } from "msw";
 import ProductDetail from "../../src/components/ProductDetail";
-import { products } from "../mocks/data";
-import { http, HttpResponse } from "msw";
-import { server } from "../mocks/server";
 import { db } from "../mocks/db";
+import { server } from "../mocks/server";
 
 describe("ProductDetail", () => {
   let productId: number;
@@ -38,5 +37,15 @@ describe("ProductDetail", () => {
     render(<ProductDetail productId={0} />);
     const message = await screen.findByText(/INVALID/i);
     expect(message).toBeInTheDocument();
+  });
+  it("should render a loading indicator when fetching data", async () => {
+    server.use(
+      http.get("/products", async () => {
+        await delay();
+        return HttpResponse.json([]);
+      })
+    );
+    render(<ProductDetail productId={1} />);
+    expect(await screen.findByText(/loading/i)).toBeInTheDocument();
   });
 });
