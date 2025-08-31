@@ -22,4 +22,5 @@ export const handlers = [
 
   // The above method we always have to create an endpoint
   ...db.product.toHandlers("rest"),
+  ...db.category.toHandlers("rest"),
 ];
