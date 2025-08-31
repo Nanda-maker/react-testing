@@ -3,6 +3,7 @@ import { delay, http, HttpResponse } from "msw";
 import ProductDetail from "../../src/components/ProductDetail";
 import { db } from "../mocks/db";
 import { server } from "../mocks/server";
+import AllProviders from "../AllProviders";
 
 describe("ProductDetail", () => {
   let productId: number;
@@ -17,7 +18,7 @@ describe("ProductDetail", () => {
     const product = db.product.findFirst({
       where: { id: { equals: productId } },
     });
-    render(<ProductDetail productId={productId} />);
+    render(<ProductDetail productId={productId} />, { wrapper: AllProviders });
     expect(
       // await screen.findByText(new RegExp(products[0].name))
       await screen.findByText(new RegExp(product!.name))
@@ -29,12 +30,12 @@ describe("ProductDetail", () => {
   });
   it("should render message if prodcut is not found", async () => {
     server.use(http.get("/products/1", () => HttpResponse.json(null)));
-    render(<ProductDetail productId={1} />);
+    render(<ProductDetail productId={1} />, { wrapper: AllProviders });
     const message = await screen.findByText(/not found/i);
     expect(message).toBeInTheDocument();
   });
   it("should render error for invalid productId", async () => {
-    render(<ProductDetail productId={0} />);
+    render(<ProductDetail productId={0} />, { wrapper: AllProviders });
     const message = await screen.findByText(/INVALID/i);
     expect(message).toBeInTheDocument();
   });
@@ -45,7 +46,7 @@ describe("ProductDetail", () => {
         return HttpResponse.json([]);
       })
     );
-    render(<ProductDetail productId={1} />);
+    render(<ProductDetail productId={1} />, { wrapper: AllProviders });
     expect(await screen.findByText(/loading/i)).toBeInTheDocument();
   });
 });

@@ -2,7 +2,8 @@
 //import TermsAndConditions from "../components/TermsAndConditions";
 
 //import { Toaster } from "react-hot-toast";
-import OrderStatusSelector from "../components/OrderStatusSelector";
+// import OrderStatusSelector from "../components/OrderStatusSelector";
+import BrowseProducts from "./BrowseProductsPage";
 
 const PlaygroundPage = () => {
   // return <TermsAndConditions />;
@@ -17,7 +18,8 @@ const PlaygroundPage = () => {
     //   <ToastDemo />
     //   <Toaster />
     // </>
-    <OrderStatusSelector onChange={console.log} />
+    // <OrderStatusSelector onChange={console.log} />
+    <BrowseProducts />
   );
 };
 
